@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Base Converter</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #FFD700;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px #FFD70033;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #FFD700;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #FFD700;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #FFD70066;
+      background-color: #2c2c2c;
+      color: #FFD700;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #FFD700;
+      box-shadow: 0 0 5px #FFD700;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #aaaaaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Base Converter</h1>
+    <div class="field">
+      <label for="binary">Binary</label>
+      <input type="text" id="binary" placeholder="e.g. 1010" oninput="fromBinary(this.value)">
+    </div>
+    <div class="field">
+      <label for="octal">Octal</label>
+      <input type="text" id="octal" placeholder="e.g. 12" oninput="fromOctal(this.value)">
+    </div>
+    <div class="field">
+      <label for="decimal">Decimal</label>
+      <input type="text" id="decimal" placeholder="e.g. 10" oninput="fromDecimal(this.value)">
+    </div>
+    <div class="field">
+      <label for="hex">Hexadecimal</label>
+      <input type="text" id="hex" placeholder="e.g. A" oninput="fromHex(this.value)">
+    </div>
+    <div class="footer">
+      SS PRIVATE CARE
+    </div>
+  </div>
+
+  <script>
+    function fromBinary(val) {
+      if (!/^[01]+$/.test(val) && val !== "") return;
+      const dec = parseInt(val, 2) || 0;
+      updateFields(dec, "binary");
+    }
+
+    function fromOctal(val) {
+      if (!/^[0-7]+$/.test(val) && val !== "") return;
+      const dec = parseInt(val, 8) || 0;
+      updateFields(dec, "octal");
+    }
+
+    function fromDecimal(val) {
+      if (!/^\d+$/.test(val) && val !== "") return;
+      const dec = parseInt(val, 10) || 0;
+      updateFields(dec, "decimal");
+    }
+
+    function fromHex(val) {
+      if (!/^[0-9a-fA-F]+$/.test(val) && val !== "") return;
+      const dec = parseInt(val, 16) || 0;
+      updateFields(dec, "hex");
+    }
+
+    function updateFields(dec, source) {
+      if (source !== "binary") document.getElementById("binary").value = dec.toString(2);
+      if (source !== "octal") document.getElementById("octal").value = dec.toString(8);
+      if (source !== "decimal") document.getElementById("decimal").value = dec.toString(10);
+      if (source !== "hex") document.getElementById("hex").value = dec.toString(16).toUpperCase();
+    }
+  </script>
+</body>
+</html>
